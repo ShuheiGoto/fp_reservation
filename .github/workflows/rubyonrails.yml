@@ -19,11 +19,12 @@ jobs:
         ports:
           - "3306:3306"
         env:
-          MYSQL_DB: fp_reservation_test
           MYSQL_ROOT_PASSWORD: password
+          MYSQL_ROOT_HOST: "%"
+        options: --health-cmd "mysqladmin ping -h 127.0.0.1" --health-interval 20s --health-timeout 10s --health-retries 10
     env:
       RAILS_ENV: test
-      DATABASE_URL: "mysql2://root:password@localhost:3306"
+      DB_HOST: '127.0.0.1'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -33,9 +34,10 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
-      # Add or replace database setup steps here
       - name: Set up database schema
-        run: bin/rails db:schema:load
+        run: |
+          bin/rails db:create
+          bin/rails db:migrate
       # Add or replace test runners here
       - name: Run tests
         run: bin/rails test
