@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  financial_planner: one
+  start_at: 2024-11-12 01:20:05
+  end_at: 2024-11-12 01:20:05
+
+two:
+  financial_planner: two
+  start_at: 2024-11-12 01:20:05
+  end_at: 2024-11-12 01:20:05
